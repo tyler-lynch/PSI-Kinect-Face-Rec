@@ -53,10 +53,7 @@ namespace KinectFaceRec
         private void PerformFaceDetection()
         {
             Console.WriteLine("Initializing Psi.");
-
-            //bool detected = false;
-
-            // First create our \Psi pipeline
+            
             using (var pipeline = Pipeline.Create("FaceDetection"))
             {
                 // Register an event handler to catch pipeline errors
@@ -65,7 +62,7 @@ namespace KinectFaceRec
                 // Register an event handler to be notified when the pipeline completes
                 pipeline.PipelineCompleted += Pipeline_PipelineCompleted;
 
-                // Next create our Kinect sensor. We will be using the color images, face tracking, and audio from the Kinect sensor
+                // Next create our Kinect sensor.
                 var kinectSensorConfig = new KinectSensorConfiguration
                 {
                     OutputColor = true,
@@ -83,13 +80,6 @@ namespace KinectFaceRec
                     face.FaceBoundingBoxInColorSpace.Bottom - face.FaceBoundingBoxInColorSpace.Top
                 )).ToList());
 
-                
-
-
-                // ********************************************************************
-                // Finally create a Live Visualizer using PsiStudio.
-                // We must persist our streams to a store in order for Live Viz to work properly
-                // ********************************************************************
 
                 // Create store for the data. Live Visualizer can only read data from a store.
                 var pathToStore = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
